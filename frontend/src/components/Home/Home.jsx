@@ -3,6 +3,8 @@ import Styles from "../../styles/Home.module.css";
 import { decodeToken } from "react-jwt";
 import { MultiSelect } from "react-multi-select-component";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 function Home() {
   const token = localStorage.getItem("token");
   const [author, setAuthor] = React.useState("ChatUser");
@@ -29,7 +31,7 @@ function Home() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/message", {
+      const response = await fetch(`${apiUrl}/api/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +70,7 @@ function Home() {
 
     try {
       const responseSenders = await fetch(
-        `http://localhost:5000/api/message/${activeChatId}/${senderId}`,
+        `${apiUrl}/message/${activeChatId}/${senderId}`,
         {
           method: "GET",
           headers: {
@@ -78,7 +80,7 @@ function Home() {
       );
 
       const responseReceivers = await fetch(
-        `http://localhost:5000/api/message/${senderId}/${activeChatId}`,
+        `${apiUrl}/message/${senderId}/${activeChatId}`,
         {
           method: "GET",
           headers: {
