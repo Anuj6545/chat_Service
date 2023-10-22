@@ -31,7 +31,7 @@ function Home() {
     }
 
     try {
-      const response = await fetch(`${apiUrl}/api/message`, {
+      const response = await fetch(`${apiUrl}/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
