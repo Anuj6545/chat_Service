@@ -154,7 +154,7 @@ function Home() {
   React.useEffect(() => {
     const users = async () => {
       try {
-        const response = await fetch(`${apiUrl}/api/users`, {
+        const response = await fetch(`${apiUrl}/users`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
