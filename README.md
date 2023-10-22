@@ -4,7 +4,7 @@
 
 - **Developer**: Anuj Kumar
 - **Email**: vikalpraj07@gmail.com
-- **GitHub**: [Your GitHub Profile](https://github.com/Anuj6545)
+- **GitHub**: [GitHub Profile](https://github.com/Anuj6545)
 
 Feel free to reach out to the developer for any inquiries, suggestions, or collaboration opportunities related to this project.
 
