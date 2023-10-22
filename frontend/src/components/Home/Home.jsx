@@ -2,10 +2,13 @@ import React from "react";
 import Styles from "../../styles/Home.module.css";
 import { decodeToken } from "react-jwt";
 import { MultiSelect } from "react-multi-select-component";
+import { io } from "socket.io-client";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 function Home() {
+  const socket = io.connect("http://localhost:5000");
+
   const token = localStorage.getItem("token");
   const [author, setAuthor] = React.useState("ChatUser");
   const [users, setUsers] = React.useState([1, 2, 3, 4, 5]);
@@ -31,7 +34,7 @@ function Home() {
     }
 
     try {
-      const response = await fetch(`${apiUrl}/message`, {
+      const response = await fetch(`${apiUrl}/api/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +73,7 @@ function Home() {
 
     try {
       const responseSenders = await fetch(
-        `${apiUrl}/message/${activeChatId}/${senderId}`,
+        `${apiUrl}/api/message/${activeChatId}/${senderId}`,
         {
           method: "GET",
           headers: {
@@ -80,7 +83,7 @@ function Home() {
       );
 
       const responseReceivers = await fetch(
-        `${apiUrl}/message/${senderId}/${activeChatId}`,
+        `${apiUrl}/api/message/${senderId}/${activeChatId}`,
         {
           method: "GET",
           headers: {
@@ -154,7 +157,7 @@ function Home() {
   React.useEffect(() => {
     const users = async () => {
       try {
-        const response = await fetch(`${apiUrl}/users`, {
+        const response = await fetch(`${apiUrl}/api/users`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -168,7 +171,7 @@ function Home() {
           label: user.username,
           value: user._id.toString(),
         }));
-        console.log("options",options);
+        console.log("options", options);
         setOptions(options);
       } catch (error) {
         console.log(error);
