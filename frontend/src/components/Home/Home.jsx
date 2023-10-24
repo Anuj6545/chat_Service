@@ -7,7 +7,7 @@ import { io } from "socket.io-client";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 function Home() {
-  const socket = io.connect("http://localhost:5000");
+  const socket = io.connect("http://localhost:8800");
 
   const token = localStorage.getItem("token");
   const [author, setAuthor] = React.useState("ChatUser");
@@ -52,6 +52,12 @@ function Home() {
           content: message,
           timestamp: new Date().toJSON(), // Use the current timestamp
         };
+
+        socket.emit("chat", {
+          senderId: senderId,
+          activeChatId: activeChatId,
+          message: message,
+        });
 
         // Update the messages state with the new message
         setMessages([...messages, newMessage]);
@@ -137,6 +143,19 @@ function Home() {
       console.error(error);
     }
   };
+
+  React.useEffect(() => {
+    socket.on("chat", (user) => {
+      if (user.senderId === senderId) {
+        const newMessage = {
+          id: user.activeChatId, // Assuming the sender is you
+          content: user.message,
+          timestamp: new Date().toJSON(), // Use the current timestamp
+        };
+        setMessages([...messages, newMessage]);
+      }
+    });
+  });
 
   // Fetch messages when the active chat changes
   React.useEffect(() => {

@@ -5,6 +5,7 @@
   background-color: #ccc;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 .left {
@@ -60,6 +61,7 @@
   width: 100%;
   height: 100%;
   padding-top: 0.5rem;
+  overflow: auto;
 }
 
 .chat {
@@ -220,6 +222,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  overflow-y: auto;
 }
 
 .message{
