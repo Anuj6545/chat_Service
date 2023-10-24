@@ -1,10 +1,3 @@
-const express = require("express");
-const app = express();
-
-require("dotenv").config();
-
-const port = 5500;
-
 const io = require("socket.io")(8800, {
   cors: {
     origin: [
@@ -27,8 +20,4 @@ io.on("connection", (socket) => {
     };
     io.emit("chat", NewUser);
   });
-});
-
-app.listen(port, () => {
-  console.log(`listening at ${port}`);
 });

@@ -8,7 +8,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const socketUrl = import.meta.env.VITE_SOCKET_URL;
 
 function Home() {
-  const socket = io.connect(socketUrl, { transports: ["websocket"] });
+  const socket = io.connect(socketUrl);
 
   const token = localStorage.getItem("token");
   const [author, setAuthor] = React.useState("ChatUser");
