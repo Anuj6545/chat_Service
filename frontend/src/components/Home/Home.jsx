@@ -5,9 +5,10 @@ import { MultiSelect } from "react-multi-select-component";
 import { io } from "socket.io-client";
 
 const apiUrl = import.meta.env.VITE_API_URL;
+const socketUrl = import.meta.env.VITE_SOCKET_URL;
 
 function Home() {
-  const socket = io.connect("http://localhost:8800");
+  const socket = io.connect(socketUrl, { transports: ["websocket"] });
 
   const token = localStorage.getItem("token");
   const [author, setAuthor] = React.useState("ChatUser");
